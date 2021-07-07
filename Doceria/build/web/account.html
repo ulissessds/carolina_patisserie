@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <title>Carolina Pâtisserie | E-commerce Website Design</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- <link rel="stylesheet" href="reset.css"/> -->
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"/>
+    <script src="scripts.js" defer></script>
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="http://placekitten.com/125/70" alt="descrição da imagem"/>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="">Início</a></li>
+                    <li><a href="">Produtos</a></li>
+                    <li><a href="">Sobre Nós</a></li>
+                    <li><a href="">Contato</a></li>
+                    <li><a href="">Conta</a></li>
+                </ul>
+            </nav>
+            <!-- Sacola de Compras -->
+            <img src="http://placekitten.com/g/30/30" alt="descrição da imagem"/>
+            <!-- Menu Sanduíche -->
+            <img src="images/menu.png" class="menu-icon" onclick="menuToggle()" alt="menu sanduíche"/>
+        </div>
+    </div>
+
+<!------- account-page ------->
+    <div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="http://placekitten.com/g/340/350" alt="descrição da imagem"/>
+                </div>
+                
+                <div class="col-2">
+                    <div class="form-container">
+                        <div class="form-btn">
+                            <span onclick="login()">Entrar</span>
+                            <span onclick="register()">Registrar</span>
+                            <hr id="Indicator"/>
+                        </div>
+                        
+                        <form id="LoginForm">
+                            <input type="text" placeholder="Usuário" required />
+                            <input type="password" placeholder="Senha" required />
+                            <button type="submit" class="btn">Entrar</button>
+                            <a href="">Esqueci a senha</a>
+                        </form>
+                        
+                        <form id="RegisterForm">
+                            <input type="text" placeholder="Usuário" required />
+                            <input type="email" placeholder="E-mail" required />
+                            <input type="password" placeholder="Senha" required />
+                            <button type="submit" class="btn">Registrar</button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!---------- Footer --------->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Baixe Nosso App</h3>
+                    <p>Baixe o app para dispositivos Android e IOS.</p>
+                    <div class="app-logo">
+                        <img src="images/play-store.png" alt="alt"/>
+                        <img src="images/app-store.png" alt="alt"/>
+                    </div>                        
+                </div>
+                <div class="footer-col-2">
+                    <img src="http://placekitten.com/125/70" alt="descrição da imagem"/>
+                    <p>Imagem da Logo e frase falando do propósito.
+                    Benefícios de ter uma vida doce e feliz.
+                    Pipipi popopo.</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Links Úteis</h3>
+                    <ul>
+                        <li>Cupons</li>
+                        <li>Blog Post</li>
+                        <li>Política de Devolução</li>
+                        <li>Afilie-se</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Siga-nos</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr/>
+            <p class="copyright">Copyright 2021 - Carolina Pâtisserie SMD</p>
+        </div>
+    </div>
+
+</body>
+    
+</html>

@@ -19,7 +19,7 @@ public class UsuarioDAO {
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT usuario_id, login, senha, nome, criado_em, modificado_em, administrador, email FROM usuario WHERE login = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, login, senha, nome, criado_em, modificado_em, administrador, email FROM usuario WHERE login = ?");
             preparedStatement.setString(1, login);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()) {
@@ -64,7 +64,7 @@ public class UsuarioDAO {
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT usuario_id, login, senha, nome, criado_em, modificado_em, administrador, email FROM usuario WHERE login = ? AND senha = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, login, senha, nome, criado_em, modificado_em, administrador, email FROM usuario WHERE login = ? AND senha = ?");
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, senha);
             ResultSet rs = preparedStatement.executeQuery();

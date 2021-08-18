@@ -1,10 +1,10 @@
-package doceria.carrinhocompra.controle;
+package doceria.sacolacompras.controle;
 
+import doceria.sacolacompras.modelo.SacolaCompras;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Ivo
+ * @author uliss
  */
-public class AdicionarProdutoCarrinhoCompraServlet extends HttpServlet {
+public class RemoverProdutoSacolaComprasServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -23,10 +23,10 @@ public class AdicionarProdutoCarrinhoCompraServlet extends HttpServlet {
         String produtoId = request.getParameter("produtoId");
 
         /* processamento */
-        Cookie cookie = CarrinhoCompra.obterCookie(request);
+        Cookie c = SacolaCompras.obterCookie(request);
         try {
-            String novoValor = CarrinhoCompra.adicionarItem(Integer.parseInt(produtoId), 1, cookie.getValue());
-            cookie.setValue(novoValor);
+            String novoValor = SacolaCompras.removerItem(Integer.parseInt(produtoId), c.getValue());
+            c.setValue(novoValor);
         } catch (Exception ex) {
             request.setAttribute("mensagem", ex.getMessage());
         }
@@ -35,5 +35,4 @@ public class AdicionarProdutoCarrinhoCompraServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("Inicio");
         requestDispatcher.forward(request, response);
     }
-
 }

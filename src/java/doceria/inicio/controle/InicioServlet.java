@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package doceria.inicio.controle;
 
+import doceria.produto.modelo.Produto;
+import doceria.produto.modelo.ProdutoDAO;
+import doceria.sacolacompras.modelo.SacolaCompras;
+import doceria.sacolacompras.modelo.SacolaComprasItem;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Ivo
+ * @author uliss
  */
 public class InicioServlet extends HttpServlet {
     @Override
@@ -30,27 +28,27 @@ public class InicioServlet extends HttpServlet {
         request.setAttribute("produtosDisponiveis", produtosDisponiveis);
         
         Cookie[] cookies = request.getCookies();
-        Cookie cookie = null;
+        Cookie c = null;
         for (int i = 0; cookies != null && i < cookies.length; i++) {
-            if (cookies[i].getName().equals("Doceria.carrinhocompras")) {
-                cookie = cookies[i];
+            if (cookies[i].getName().equals("doceria.sacolacompras")) {
+                c = cookies[i];
                 break;
             }
         }
-        if (cookie == null) {
-            cookie = new Cookie("Doceria.carrinhocompras", "");
+        if (c == null) {
+            c = new Cookie("doceria.sacolacompras", "");
         }
-        cookie.setMaxAge(Integer.MAX_VALUE);
-        response.addCookie(cookie);
+        c.setMaxAge(Integer.MAX_VALUE);
+        response.addCookie(c);
         try {
-            List<CarrinhoCompraItem> carrinhoCompraItens = CarrinhoCompra.obterCarrinhoCompra(cookie.getValue());
-            request.setAttribute("carrinhoCompraItens", carrinhoCompraItens);
+            List<SacolaComprasItem> sacolaCompras = SacolaCompras.obterSacolaCompras(c.getValue());
+            request.setAttribute("sacolaCompras", sacolaCompras);
         } catch (Exception ex) {
 
         }
 
         /* saída */
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.html"); /*nos servlets login e logout, mudar o requestDispatcher("index.jsp") para ("inicio")*/
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp"); /*nos servlets login e logout, mudar o requestDispatcher("index.jsp") para ("inicio")*/
         requestDispatcher.forward(request, response);
     }
 }

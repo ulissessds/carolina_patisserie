@@ -26,7 +26,7 @@ public class Usuario {
     }
     
     public Usuario (ResultSet rs) throws SQLException {
-        this.id = rs.getInt("usuario_id");
+        this.id = rs.getInt("id");
         this.login = rs.getString("login");
         this.senha = rs.getString("senha");
         this.nome = rs.getString("nome");

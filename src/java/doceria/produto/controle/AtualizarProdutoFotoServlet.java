@@ -1,22 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package doceria.produto.controle;
 
+import doceria.produto.modelo.Produto;
+import doceria.produto.modelo.ProdutoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Ivo
+ * @author uliss
  */
 public class AtualizarProdutoFotoServlet extends HttpServlet {
     @Override
@@ -27,11 +23,8 @@ public class AtualizarProdutoFotoServlet extends HttpServlet {
         Produto produto = produtoDAO.obter(id);
         if (produto != null) {
             request.setAttribute("produto", produto);
-        } else {
-            request.setAttribute("mensagem", "Não foi possível encontrar este produto");
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/uploadFotoProduto.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/upload-foto-produto.jsp");
         requestDispatcher.forward(request, response);
     }
-
 }

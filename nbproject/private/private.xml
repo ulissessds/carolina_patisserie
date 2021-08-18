@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/uliss/OneDrive/Documentos/NetBeansProjects/Doceria/src/java/doceria/usuario/modelo/Usuario.java</file>
+            <file>file:/C:/Users/uliss/OneDrive/Documentos/NetBeansProjects/Doceria/web/WEB-INF/jsp/perfil-cliente.jsp</file>
+            <file>file:/C:/Users/uliss/OneDrive/Documentos/NetBeansProjects/Doceria/web/WEB-INF/jsp/conta-cliente.jsp</file>
+            <file>file:/C:/Users/uliss/OneDrive/Documentos/NetBeansProjects/Doceria/src/java/doceria/usuario/controle/CadastrarUsuarioServlet.java</file>
             <file>file:/C:/Users/uliss/OneDrive/Documentos/NetBeansProjects/Doceria/web/conta.jsp</file>
+            <file>file:/C:/Users/uliss/OneDrive/Documentos/NetBeansProjects/Doceria/src/java/doceria/usuario/modelo/UsuarioDAO.java</file>
             <file>file:/C:/Users/uliss/OneDrive/Documentos/NetBeansProjects/Doceria/src/java/doceria/usuario/controle/LoginServlet.java</file>
             <file>file:/C:/Users/uliss/OneDrive/Documentos/NetBeansProjects/Doceria/web/WEB-INF/jsp/conta-admin.jsp</file>
         </group>

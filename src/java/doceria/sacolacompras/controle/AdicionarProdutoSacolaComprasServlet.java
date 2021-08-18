@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package doceria.carrinhocompra.controle;
+package doceria.sacolacompras.controle;
 
+import doceria.sacolacompras.modelo.SacolaCompras;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,20 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Ivo
+ * @author uliss
  */
-public class RemoverProdutoCarrinhoCompraServlet extends HttpServlet {
+public class AdicionarProdutoSacolaComprasServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         /* entrada */
         String produtoId = request.getParameter("produtoId");
 
         /* processamento */
-        Cookie cookie = CarrinhoCompra.obterCookie(request);
+        Cookie c = SacolaCompras.obterCookie(request);
         try {
-            String novoValor = CarrinhoCompra.removerItem(Integer.parseInt(produtoId), cookie.getValue());
-            cookie.setValue(novoValor);
+            String novoValor = SacolaCompras.adicionarItem(Integer.parseInt(produtoId), 1, c.getValue());
+            c.setValue(novoValor);
         } catch (Exception ex) {
             request.setAttribute("mensagem", ex.getMessage());
         }
@@ -39,5 +35,4 @@ public class RemoverProdutoCarrinhoCompraServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("Inicio");
         requestDispatcher.forward(request, response);
     }
-
 }

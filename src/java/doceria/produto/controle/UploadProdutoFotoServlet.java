@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package doceria.produto.controle;
 
+import doceria.produto.modelo.ProdutoDAO;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,18 +8,17 @@ import java.util.Iterator;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.servlet.ServletRequestContext;
 
 /**
  *
- * @author Ivo
+ * @author uliss
  */
 public class UploadProdutoFotoServlet extends HttpServlet {
     @Override
@@ -38,7 +33,7 @@ public class UploadProdutoFotoServlet extends HttpServlet {
             boolean sucesso = false;
             try {
                 DiskFileItemFactory factory = new DiskFileItemFactory();
-                factory.setRepository(new File("/home/nomeusuario/doceria/temp*/"));
+                factory.setRepository(new File("C:\\Users\\uliss\\OneDrive\\Documentos\\SMD\\Semestre_7\\Prog Web\\doceria\\temp"));
 
                 ServletFileUpload upload = new ServletFileUpload(factory);
 
@@ -57,9 +52,15 @@ public class UploadProdutoFotoServlet extends HttpServlet {
                 }
                 
                 if (id != -1 && foto != null) {
-                    foto.write(new File("/home/nomeusuario/doceria/produtos/" + id + foto.getName().substring(foto.getName().lastIndexOf("."))));
+                    foto.write(
+                            new File("C:\\Users\\uliss\\OneDrive\\Documentos\\SMD\\Semestre_7\\Prog Web\\doceria\\produtos\\"
+                                    + id + foto.getName().substring(foto.getName().lastIndexOf(".")))
+                    );
                     ProdutoDAO produtoDAO = new ProdutoDAO();
-                    produtoDAO.atualizarFoto(id, "/home/nomeusuario/doceria/produtos/" + id + foto.getName().substring(foto.getName().lastIndexOf(".")));
+                    produtoDAO.atualizarFoto(
+                            id, "C:\\Users\\uliss\\OneDrive\\Documentos\\SMD\\Semestre_7\\Prog Web\\doceria\\produtos\\"
+                                    + id + foto.getName().substring(foto.getName().lastIndexOf("."))
+                    );
                     sucesso = true;
                 }
                 
@@ -72,8 +73,8 @@ public class UploadProdutoFotoServlet extends HttpServlet {
                 request.setAttribute("mensagem", "Não foi possível processo o upload da foto deste produto");
             }
         }
+        
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("AtualizarProdutoFoto?id=" + id);
         requestDispatcher.forward(request, response);
     }
-
 }

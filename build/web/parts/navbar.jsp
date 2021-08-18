@@ -13,7 +13,7 @@
         </div>
         <nav>
             <ul id="MenuItems">
-                <li><a href="">Início</a></li>
+                <li><a href="Inicio">Início</a></li>
                 <li><a href="">Produtos</a></li>
                 <li><a href="">Sobre Nós</a></li>
                 <li><a href="">Contato</a></li>

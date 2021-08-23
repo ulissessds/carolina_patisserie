@@ -1,6 +1,5 @@
 package doceria.produto.modelo;
 
-import doceria.usuario.modelo.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -97,4 +94,44 @@ public class ProdutoDAO {
             throw new Exception(ex.getMessage());
         }
     }
+    
+    public void atualizarProduto(String descricao, Double preco, Integer quantidade, int id) throws SQLException {
+        int resultado = 0;
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE produto SET descricao = ?, preco = ?, quantidade = ? WHERE id = ?");
+            preparedStatement.setString(1, descricao);
+            preparedStatement.setDouble(2, preco);
+            preparedStatement.setInt(3, quantidade);
+            preparedStatement.setInt(4, id);
+            resultado = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
+        } catch (ClassNotFoundException ex) {
+            throw new SQLException(ex.getMessage());
+        }
+        if (resultado == 0) {
+            throw new SQLException("Registro não foi atualizado com sucesso");
+        }
+    }
+
+    public void removerProduto(int id) throws SQLException {
+        int resultado = 0;
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM produto WHERE id = ?");
+            preparedStatement.setInt(1, id);
+            resultado = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
+        } catch (ClassNotFoundException ex) {
+            throw new SQLException(ex.getMessage());
+        }
+        if (resultado == 0) {
+            throw new SQLException("Registro não foi removido com sucesso");
+        }
+    }
+    
 }

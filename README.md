@@ -7,6 +7,7 @@ Membros:
 422137 - Samuel Moura Alves
 471194 - Thaís Gomes Carlos
 414818 - Ivo Espíndola Romero Ferro
+478955 - Leandro Holanda Torres
 
 Tecnologias e linguagem escolhidas:
 Decidimos usar o NetBeans como IDE junto com o Tomcat para fazer a aplicação Web. 

@@ -42,6 +42,7 @@ public class CategoriaDAO {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO categoria (descricao) VALUES (?);");
+            preparedStatement.setString(1, c.getDescricao());
             sucesso = preparedStatement.executeUpdate() == 1;
             preparedStatement.close();
             connection.close();
@@ -52,14 +53,14 @@ public class CategoriaDAO {
         }
     }
     
-    public void atualizarCategoria(String descricao, int id) throws SQLException {
+    public void atualizarCategoria(Categoria c) throws SQLException {
         int resultado = 0;
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categoria SET descricao = ? WHERE id = ?");
-            preparedStatement.setString(1, descricao);
-            preparedStatement.setInt(2, id);
+            preparedStatement.setString(1, c.getDescricao());
+            preparedStatement.setInt(2, c.getId());
             resultado = preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();

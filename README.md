@@ -3,10 +3,15 @@ Trabalho final da cadeira de Prog Web 1.
 Site de E-commerce da doceria "Carolina Pâtisserie".
 
 Membros:
+
 418441 - Ulisses Silva de Sousa
+
 422137 - Samuel Moura Alves
+
 471194 - Thaís Gomes Carlos
+
 414818 - Ivo Espíndola Romero Ferro
+
 478955 - Leandro Holanda Torres
 
 Tecnologias e linguagem escolhidas:

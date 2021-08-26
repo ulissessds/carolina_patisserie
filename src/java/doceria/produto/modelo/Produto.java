@@ -14,6 +14,7 @@ public class Produto {
     private Double preco;
     private Integer quantidade;
     private String foto;
+    private Integer categoria_id;
 
     public Produto () {
     }
@@ -24,6 +25,7 @@ public class Produto {
         this.preco = rs.getDouble("preco");
         this.quantidade = rs.getInt("quantidade");
         this.foto = rs.getString("foto");
+        this.categoria_id = rs.getInt("categoria_id");
     }
 
     public Integer getId() {
@@ -65,4 +67,12 @@ public class Produto {
     public void setFoto(String foto) {
         this.foto = foto;
     }    
+    
+    public Integer getCategoria_id() {
+        return categoria_id;
+    }
+
+    public void setCategoria_id(Integer categoria_id) {
+        this.categoria_id = categoria_id;
+    }
 }

@@ -1,5 +1,7 @@
 package doceria.inicio.controle;
 
+import doceria.categoria.modelo.Categoria;
+import doceria.categoria.modelo.CategoriaDAO;
 import doceria.produto.modelo.Produto;
 import doceria.produto.modelo.ProdutoDAO;
 import doceria.sacolacompras.modelo.SacolaCompras;

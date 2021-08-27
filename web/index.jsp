@@ -4,6 +4,8 @@
     Author     : uliss
 --%>
 
+<%@page import="doceria.categoria.modelo.CategoriaDAO"%>
+<%@page import="doceria.categoria.modelo.Categoria"%>
 <%@page import="doceria.sacolacompras.modelo.SacolaComprasItem"%>
 <%@page import="doceria.produto.modelo.Produto"%>
 <%@page import="java.util.List"%>
@@ -20,15 +22,20 @@
         <div class="header">
             <%@ include file="parts/navbar.jsp" %>
             
-            <div class="container">
-                <div class="row">
-                    <div class="col-2">
-                        <h1>Frase de efeito<br/>Colocar aqui!</h1>
-                        <p>Pequeno texto. Fazendo um resumo motivacional para se comer doces.</p>
-                        <a href="" class="btn">Explore agora →</a>
-                    </div>
-                    <div class="col-2">
-                        <img src="http://placekitten.com/g/640/480" alt="descrição da imagem"/>
+            <div class="account-page">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-2">
+                            <h1>Frase de efeito<br/>Colocar aqui!</h1>
+                            <p>Pequeno texto. Fazendo um resumo motivacional para se comer doces.</p>
+                            <a href="" class="btn">Explore agora →</a>
+                        </div>
+
+                        <div class="col-2">
+                            <%@ include file="parts/login-register-form.jsp" %>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -41,6 +48,7 @@
             <h2 class="title">Produtos em Estoque</h2>
             <div class="row">
                 <% 
+                    CategoriaDAO categoriaDAO = new CategoriaDAO();
                     List<Produto> produtosDisponiveis = (List<Produto>) request.getAttribute("produtosDisponiveis");
                     if (produtosDisponiveis.isEmpty()) {
                 %>
@@ -49,24 +57,18 @@
                     } else {
                         for (int i = 0; i < produtosDisponiveis.size(); i++) {
                             Produto p = produtosDisponiveis.get(i);
+                            Categoria c = categoriaDAO.obter(p.getCategoriaIdFk());
                 %>
                 <div class="col-4">
-                    <img src="http://placekitten.com/310/400" alt="descrição da imagem"/>
+                    <img src="MostrarProdutoFoto?id=<%= p.getId() %>" width="200" height="160"/>
                     <h4><%= p.getDescricao() %></h4>
                     <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                        <i class="far fa-star"></i>
+                        Categoria: <%= c.getDescricao() %>
                     </div>
                     <p>R$ <%= p.getPreco() %></p>
                     <p>Quantidade: <%= p.getQuantidade() %></p>
-                    <a href="AdicionarProdutoSacolaCompras?produtoId=<%= p.getId() %>" class="btn">
+                    <a href="AdicionarProdutoSacolaCompras?produtoId=<%= p.getId() %>" class="btn2">
                         Adicionar à Sacola
-                    </a>
-                    <a href="AtualizarProdutoFoto?id=<%= p.getId() %>" class="btn">
-                        Atualizar Foto
                     </a>
                     <%
                         if (p.getFoto() == null || p.getFoto().trim().length() == 0) {
@@ -75,7 +77,7 @@
                     <%
                         } else {
                     %>
-                    <a href="DownloadProdutoFoto?id=<%= p.getId() %>" class="btn">
+                    <a href="DownloadProdutoFoto?id=<%= p.getId() %>" class="btn2">
                         Download Foto
                     </a>
                     <%

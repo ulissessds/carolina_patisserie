@@ -29,7 +29,7 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
         request.setAttribute("mensagem", "Sua sessão foi encerrada");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("conta.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Inicio");
         requestDispatcher.forward(request, response);
     }
 }

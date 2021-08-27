@@ -80,17 +80,17 @@ public class UsuarioDAO {
         return sucesso;
     }
     
-    public void atualizar(String login, String senha, String nome, String email, int id) throws SQLException {
+    public void atualizar(Usuario u) throws SQLException {
         int resultado = 0;
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE usuario SET login = ?, senha = ?, nome = ?, email = ? WHERE id = ?");
-            preparedStatement.setString(1, login);
-            preparedStatement.setString(2, senha);
-            preparedStatement.setString(3, nome);
-            preparedStatement.setString(4, email);
-            preparedStatement.setInt(5, id);
+            preparedStatement.setString(1, u.getLogin());
+            preparedStatement.setString(2, u.getSenha());
+            preparedStatement.setString(3, u.getNome());
+            preparedStatement.setString(4, u.getEmail());
+            preparedStatement.setInt(5, u.getId());
             resultado = preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();

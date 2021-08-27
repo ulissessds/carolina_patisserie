@@ -18,20 +18,22 @@
         
         <% Usuario usuario = (Usuario) session.getAttribute("usuario"); %>
         <div class="account-page">
-            <br/>
-            <br/>
             <div class="container">
                 <div class="row">
+                    
                     <div class="col-2">
-                        <h1>Olá, <%= usuario.getNome() %></h1>
+                        <h2>Olá, <%= usuario.getNome() %></h2>
+                        <h3>Bem vindo à sua página de Cliente</h3>
                     </div>
 
                     <div class="col-2">
-                        <a href="VerPerfil">Ver Perfil</a>
+                        <a href="VerPerfil" class="btn2">Ver Perfil</a>
                         <br/>
+                        <a href="ExcluirUsuario" class="btn2">Excluir Cadastro</a>
                         <br/>
-                        <a href="Logout">Sair</a>
+                        <a href="Logout" class="btn2">Sair</a>
                     </div>
+                        
                 </div>
             </div>
             <br/>

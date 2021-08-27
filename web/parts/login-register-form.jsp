@@ -6,43 +6,32 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<div class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="footer-col-1">
-                <h3>Baixe Nosso App</h3>
-                <p>Baixe o app para dispositivos Android e IOS.</p>
-                <div class="app-logo">
-                    <img src="images/play-store.png" alt="alt"/>
-                    <img src="images/app-store.png" alt="alt"/>
-                </div>                        
-            </div>
-            <div class="footer-col-2">
-                <img src="http://placekitten.com/125/70" alt="descrição da imagem"/>
-                <p>Imagem da Logo e frase falando do propósito.
-                Benefícios de ter uma vida doce e feliz.
-                Pipipi popopo.</p>
-            </div>
-            <div class="footer-col-3">
-                <h3>Links Úteis</h3>
-                <ul>
-                    <li>Cupons</li>
-                    <li>Blog Post</li>
-                    <li>Política de Devolução</li>
-                    <li>Afilie-se</li>
-                </ul>
-            </div>
-            <div class="footer-col-4">
-                <h3>Siga-nos</h3>
-                <ul>
-                    <li>Facebook</li>
-                    <li>Twitter</li>
-                    <li>Instagram</li>
-                    <li>Youtube</li>
-                </ul>
-            </div>
-        </div>
-        <hr/>
-        <p class="copyright">Copyright 2021 - Carolina Pâtisserie SMD</p>
+<div class="form-container">
+    
+    <div class="form-btn">
+        <span onclick="login()">Entrar</span>
+        <span onclick="register()">Registrar</span>
+        <hr id="Indicator"/>
     </div>
+
+    <form id="LoginForm" action="Login" method="post">
+        <input type="text" name="login" placeholder="Login" required />
+        <input type="password" name="senha" placeholder="Senha" required />
+        <button type="submit" class="btn">Entrar</button>
+        <a href="">Esqueci a senha</a><br/>
+        <% if (request.getAttribute("mensagem2") != null) { %>
+        <div id="Erro"><%= request.getAttribute("mensagem2")%></div>
+        <% } else if (request.getAttribute("mensagem") != null) { %>
+        <div id="Erro"><%= request.getAttribute("mensagem")%></div>
+        <% } %>
+    </form>
+
+    <form id="RegisterForm" action="CadastrarUsuario" method="post"> 
+        <input type="text" name="nome" placeholder="Nome" required />
+        <input type="email" name="email" placeholder="E-mail" required />
+        <input type="text" name="login" placeholder="Login" required />
+        <input type="password" name="senha" placeholder="Senha" required />
+        <button type="submit" class="btn">Registrar</button>
+    </form>
+
 </div>

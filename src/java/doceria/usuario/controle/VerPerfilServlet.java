@@ -25,7 +25,7 @@ public class VerPerfilServlet extends HttpServlet {
      */
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/perfil-cliente.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/perfil-usuario.jsp");
         requestDispatcher.forward(request, response);
     }
 }

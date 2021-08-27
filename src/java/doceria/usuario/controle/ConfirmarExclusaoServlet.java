@@ -38,11 +38,11 @@ public class ConfirmarExclusaoServlet extends HttpServlet {
                 Logger.getLogger(AtualizarUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             /* Saída */
-            request.setAttribute("mensagem", "Cadastro excluído com sucesso");
+            request.setAttribute("mensagem2", "Cadastro excluído com sucesso");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("Logout");
             requestDispatcher.forward(request, response);
         } else {
-            request.setAttribute("mensagem", "Login ou senha incorreta");
+            request.setAttribute("mensagem2", "Login ou senha incorreta, entre novamente");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("Logout");
             requestDispatcher.forward(request, response);
         }

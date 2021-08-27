@@ -19,7 +19,7 @@ public class ProdutoDAO {
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, descricao, preco, quantidade, foto FROM produto WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, descricao, preco, quantidade, foto, categoria_id_fk FROM produto WHERE id = ?");
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()) {
@@ -36,15 +36,19 @@ public class ProdutoDAO {
         return p;
     }
     
-    public void inserir(Produto p) throws Exception {
+    public void inserir(Produto p, String c_descricao) throws Exception {
         boolean sucesso = false;
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO produto (descricao, preco, quantidade) VALUES (?, ?, ?);");
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO produto (descricao, preco, quantidade, categoria_id_fk) "
+                            + "VALUES (?, ?, ?, "
+                            + "(SELECT categoria_id FROM categoria WHERE descricao = ?));");
             preparedStatement.setString(1, p.getDescricao());
             preparedStatement.setDouble(2, p.getPreco());
             preparedStatement.setInt(3, p.getQuantidade());
+            preparedStatement.setString(4, c_descricao);
             sucesso = preparedStatement.executeUpdate() == 1;
             preparedStatement.close();
             connection.close();
@@ -60,7 +64,7 @@ public class ProdutoDAO {
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, descricao, preco, quantidade, foto FROM produto WHERE quantidade > 0");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, descricao, preco, quantidade, foto, categoria_id_fk FROM produto WHERE quantidade > 0;");
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()) {
                 Produto p = new Produto(rs);
@@ -95,16 +99,19 @@ public class ProdutoDAO {
         }
     }
     
-    public void atualizarProduto(String descricao, Double preco, Integer quantidade, int id) throws SQLException {
+    public void atualizarProduto(Produto p, String c_descricao) throws SQLException {
         int resultado = 0;
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE produto SET descricao = ?, preco = ?, quantidade = ? WHERE id = ?");
-            preparedStatement.setString(1, descricao);
-            preparedStatement.setDouble(2, preco);
-            preparedStatement.setInt(3, quantidade);
-            preparedStatement.setInt(4, id);
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE produto SET descricao = ?, preco = ?, quantidade = ?, "
+                        + "categoria_id_fk = (SELECT categoria_id FROM categoria WHERE descricao = ?) WHERE id = ?");
+            preparedStatement.setString(1, p.getDescricao());
+            preparedStatement.setDouble(2, p.getPreco());
+            preparedStatement.setInt(3, p.getQuantidade());
+            preparedStatement.setString(4, c_descricao);
+            preparedStatement.setInt(5, p.getId());
             resultado = preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();

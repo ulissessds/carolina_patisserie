@@ -9,23 +9,23 @@ import java.sql.SQLException;
  */
 public class Categoria {
 	
-    private Integer id;
+    private Integer categoria_id;
     private String descricao;
 
     public Categoria () {
     }
     
     public Categoria (ResultSet rs) throws SQLException {
-        this.id = rs.getInt("id");
+        this.categoria_id = rs.getInt("categoria_id");
         this.descricao = rs.getString("descricao");
     }
 
     public Integer getId() {
-        return id;
+        return categoria_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer categoria_id) {
+        this.categoria_id = categoria_id;
     }
 
     public String getDescricao() {

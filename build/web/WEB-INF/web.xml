@@ -40,6 +40,54 @@
         <servlet-name>DownloadProdutoFotoServlet</servlet-name>
         <servlet-class>doceria.produto.controle.DownloadProdutoFotoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExcluirUsuarioServlet</servlet-name>
+        <servlet-class>doceria.usuario.controle.ExcluirUsuarioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostrarProdutoFotoServlet</servlet-name>
+        <servlet-class>doceria.produto.controle.MostrarProdutoFotoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmarExclusaoServlet</servlet-name>
+        <servlet-class>doceria.usuario.controle.ConfirmarExclusaoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarUsuarioServlet</servlet-name>
+        <servlet-class>doceria.usuario.controle.AtualizarUsuarioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConsultarCategoriasServlet</servlet-name>
+        <servlet-class>doceria.categoria.controle.ConsultarCategoriasServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarCategoriaServlet</servlet-name>
+        <servlet-class>doceria.categoria.controle.AtualizarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdicionarCategoriaServlet</servlet-name>
+        <servlet-class>doceria.categoria.controle.AdicionarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExcluirCategoriaServlet</servlet-name>
+        <servlet-class>doceria.categoria.controle.ExcluirCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdicionarProdutoServlet</servlet-name>
+        <servlet-class>doceria.produto.controle.AdicionarProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AlterarProdutoServlet</servlet-name>
+        <servlet-class>doceria.produto.controle.AlterarProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarProdutoServlet</servlet-name>
+        <servlet-class>doceria.produto.controle.AtualizarProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExcluirProdutoServlet</servlet-name>
+        <servlet-class>doceria.produto.controle.ExcluirProdutoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -80,11 +128,61 @@
         <servlet-name>DownloadProdutoFotoServlet</servlet-name>
         <url-pattern>/DownloadProdutoFoto</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExcluirUsuarioServlet</servlet-name>
+        <url-pattern>/ExcluirUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostrarProdutoFotoServlet</servlet-name>
+        <url-pattern>/MostrarProdutoFoto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmarExclusaoServlet</servlet-name>
+        <url-pattern>/ConfirmarExclusao</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarUsuarioServlet</servlet-name>
+        <url-pattern>/AtualizarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultarCategoriasServlet</servlet-name>
+        <url-pattern>/ConsultarCategorias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarCategoriaServlet</servlet-name>
+        <url-pattern>/AtualizarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdicionarCategoriaServlet</servlet-name>
+        <url-pattern>/AdicionarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExcluirCategoriaServlet</servlet-name>
+        <url-pattern>/ExcluirCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdicionarProdutoServlet</servlet-name>
+        <url-pattern>/AdicionarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AlterarProdutoServlet</servlet-name>
+        <url-pattern>/AlterarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarProdutoServlet</servlet-name>
+        <url-pattern>/AtualizarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExcluirProdutoServlet</servlet-name>
+        <url-pattern>/ExcluirProduto</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
     <welcome-file-list>
         <welcome-file>Inicio</welcome-file>
     </welcome-file-list>

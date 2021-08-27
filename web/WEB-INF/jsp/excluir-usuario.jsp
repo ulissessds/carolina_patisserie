@@ -4,6 +4,7 @@
     Author     : uliss
 --%>
 
+<%@page import="doceria.usuario.modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,33 +16,27 @@
     <body>
         <%@ include file="../../parts/navbar.jsp" %>
         
-        <jsp:useBean id="usuario" class="doceria.usuario.modelo.Usuario" scope="session" />
+        <% Usuario usuario = (Usuario) session.getAttribute("usuario"); %>
         
         <div class="account-page">
             <div class="container">
-                <h2>Perfil do Cliente</h2>
-                <table>
-                    <tr>
-                        <td>Nome:</td>
-                        <td><jsp:getProperty name="usuario" property="nome" /></td>
-                    </tr>
-                    <br/>
-                    <tr>
-                        <td>E-mail:</td>
-                        <td><jsp:getProperty name="usuario" property="email" /></td>
-                    </tr>
-                    <br/>
-                    <tr>
-                        <td>Login:</td>
-                        <td><jsp:getProperty name="usuario" property="login" /></td>
-                    </tr>
-                    <br/>
-                    <tr>
-                        <td>Usuario criado em:</td>
-                        <td><jsp:getProperty name="usuario" property="criado_em" /></td>
-                    </tr>
-                    <br/>
-                </table>
+                <div class="row">
+                    <div class="col-2">
+                        <h1>Sentiremos sua falta <%= usuario.getNome() %>...</h1>
+                        <p>Atenção! Esta ação é definitiva.</p>
+                        <p>Após excluir seu cadastro, será necessário criar um novo cadastro caso deseje utilizar nossos serviços novamente.</p>
+                    </div>
+                            
+                    <div class="col-2">
+                        <h2>Insira Login e Senha para confirmar exclusão</h2>
+                        <form action="ConfirmarExclusao" method="post">
+                            <input type="text" name="login" placeholder="Login" required />
+                            <input type="password" name="senha" placeholder="Senha" required/>
+                            <button type="submit" class="btn">Excluir meu cadastro</button>
+                        </form>
+                    </div>
+                            
+                </div>
             </div>
         </div>
                         

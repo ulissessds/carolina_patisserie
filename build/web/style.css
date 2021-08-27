@@ -63,7 +63,14 @@ p{
 ul {
     list-style-type: none;
 }
-
+table,
+th,
+td {
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+      
 /* classes */
 .navbar {
     display: flex;
@@ -116,7 +123,25 @@ ul {
     border-radius: 30px;
     transition: background 0.8s;
 }
+.btn2{
+    display: inline-block;
+    background: #fa888c;
+    color: #fff;
+    padding-top: 8px;
+    padding-right: 30px;
+    padding-bottom: 8px;
+    padding-left: 30px;
+    margin-top: 10px;
+    margin-right: 0;
+    margin-bottom: 10px;
+    margin-left: 0;
+    border-radius: 30px;
+    transition: background 0.8s;
+}
 .btn:hover {
+    background: #8c5b47;
+}
+.btn2:hover {
     background: #8c5b47;
 }
 .header {

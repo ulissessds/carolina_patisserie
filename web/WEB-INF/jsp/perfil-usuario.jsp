@@ -19,29 +19,49 @@
         
         <div class="account-page">
             <div class="container">
-                <h2>Perfil do Cliente</h2>
-                <table>
-                    <tr>
-                        <td>Nome:</td>
-                        <td><jsp:getProperty name="usuario" property="nome" /></td>
-                    </tr>
-                    <br/>
-                    <tr>
-                        <td>E-mail:</td>
-                        <td><jsp:getProperty name="usuario" property="email" /></td>
-                    </tr>
-                    <br/>
-                    <tr>
-                        <td>Login:</td>
-                        <td><jsp:getProperty name="usuario" property="login" /></td>
-                    </tr>
-                    <br/>
-                    <tr>
-                        <td>Usuario criado em:</td>
-                        <td><jsp:getProperty name="usuario" property="criado_em" /></td>
-                    </tr>
-                    <br/>
-                </table>
+                <div class="row">
+                    
+                    <div class="col-2">
+                        <h2>Dados de Usuário</h2>
+                        <table>
+                            <tr>
+                                <td>Nome:</td>
+                                <td><jsp:getProperty name="usuario" property="nome" /></td>
+                            </tr>
+                            <br/>
+                            <tr>
+                                <td>E-mail:</td>
+                                <td><jsp:getProperty name="usuario" property="email" /></td>
+                            </tr>
+                            <br/>
+                            <tr>
+                                <td>Login:</td>
+                                <td><jsp:getProperty name="usuario" property="login" /></td>
+                            </tr>
+                            <br/>
+                            <tr>
+                                <td>Usuario criado em:</td>
+                                <td><jsp:getProperty name="usuario" property="criado_em" /></td>
+                            </tr>
+                            <br/>
+                        </table>
+                    </div>
+                            
+                    <div class="col-2">
+                        <h2>Atualizar Meus Dados</h2>
+                        <form action="AtualizarUsuario" method="post">
+                            <input type="text" name="novoNome" placeholder="Inserir novo Nome"/>
+                            <input type="email" name="novoEmail" placeholder="Inserir novo Email"/>
+                            <input type="text" name="novoLogin" placeholder="Inserir novo Login"/>
+                            <input type="password" name="novaSenha" placeholder="Inserir nova Senha"/>
+                            <h3>Insira Login e Senha Atuais para confirmar atualização</h3>
+                            <input type="text" name="login" placeholder="Login" required />
+                            <input type="password" name="senha" placeholder="Senha" required/>
+                            <button type="submit" class="btn">Atualizar Meus Dados</button>
+                        </form>
+                    </div>
+                            
+                </div>
             </div>
         </div>
                         

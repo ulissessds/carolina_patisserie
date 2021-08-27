@@ -19,7 +19,7 @@ public class CategoriaDAO {
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, descricao FROM categoria");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT categoria_id, descricao FROM categoria;");
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()) {
                 Categoria c = new Categoria(rs);
@@ -36,13 +36,13 @@ public class CategoriaDAO {
         return categorias;
     }
     
-    public void inserir(Categoria c) throws Exception {
+    public void inserir(String descricao) throws Exception {
         boolean sucesso = false;
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO categoria (descricao) VALUES (?);");
-            preparedStatement.setString(1, c.getDescricao());
+            preparedStatement.setString(1, descricao);
             sucesso = preparedStatement.executeUpdate() == 1;
             preparedStatement.close();
             connection.close();
@@ -58,7 +58,7 @@ public class CategoriaDAO {
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categoria SET descricao = ? WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categoria SET descricao = ? WHERE categoria_id = ?");
             preparedStatement.setString(1, c.getDescricao());
             preparedStatement.setInt(2, c.getId());
             resultado = preparedStatement.executeUpdate();
@@ -78,7 +78,7 @@ public class CategoriaDAO {
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM categoria WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM categoria WHERE categoria_id = ?;");
             preparedStatement.setInt(1, id);
             resultado = preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -91,4 +91,25 @@ public class CategoriaDAO {
         }
     }
     
+    public Categoria obter(Integer id) {
+        Categoria c = null;
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT categoria_id, descricao FROM categoria WHERE categoria_id = ?;");
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()) {
+                c = new Categoria(rs);
+            }
+            rs.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (ClassNotFoundException ex) {
+            return null;
+        } catch (SQLException ex) {
+            return null;
+        }
+        return c;
+    }
 }

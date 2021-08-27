@@ -49,11 +49,11 @@ public class AtualizarUsuarioServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.setAttribute("usuario", u);
             /* Saída */
-            request.setAttribute("mensagem", "Usuário atualizado com sucesso, faça seu login novamente");
+            request.setAttribute("mensagem2", "Usuário atualizado com sucesso, faça seu login novamente");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("Logout");
             requestDispatcher.forward(request, response);
         } else {
-            request.setAttribute("mensagem", "Login ou senha incorreta");
+            request.setAttribute("mensagem2", "Login ou senha incorreta");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("Logout");
             requestDispatcher.forward(request, response);
         }

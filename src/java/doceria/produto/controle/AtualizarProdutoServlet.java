@@ -1,10 +1,13 @@
 package doceria.produto.controle;
 
+import doceria.categoria.modelo.Categoria;
+import doceria.categoria.modelo.CategoriaDAO;
 import doceria.produto.modelo.Produto;
 import doceria.produto.modelo.ProdutoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -26,7 +29,8 @@ public class AtualizarProdutoServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String novaDescricao = request.getParameter("novaDescricao");
         Double novoPreco = -1.0; 
-        int novaQuantidade = -1; 
+        int novaQuantidade = Integer.parseInt(request.getParameter("novaQuantidade"));
+        String categoriaDescricao = request.getParameter("categoriaDescricao");
         
         if (request.getParameter("novoPreco") != null && request.getParameter("novoPreco").trim().length() > 0) {
             novoPreco = Double.parseDouble(request.getParameter("novoPreco"));
@@ -40,18 +44,25 @@ public class AtualizarProdutoServlet extends HttpServlet {
         if (novaDescricao != null && novaDescricao.trim().length() > 0) {p.setDescricao(novaDescricao);}
         if (novoPreco >= 0) {p.setPreco(novoPreco);}
         if (novaQuantidade >= 0) {p.setQuantidade(novaQuantidade);}
+        
         try {
-            produtoDAO.atualizarProduto(p);
+            produtoDAO.atualizarProduto(p, categoriaDescricao);
             request.setAttribute("mensagem", "Produto atualizado com sucesso");
         } catch (SQLException ex) {
             Logger.getLogger(AtualizarProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("mensagem", "Erro, produto não foi atualizado");
         }
         
-        if (p != null) {
-            request.setAttribute("produto", p);
-        }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/alterar-produto.jsp");
+        // mandar a lista de categorias
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        List<Categoria> categorias = categoriaDAO.listarCategorias();
+        request.setAttribute("categorias", categorias);
+        // mandar a lista de produtos
+        List<Produto> produtosDisponiveis = produtoDAO.obterProdutosEmEstoque();
+        request.setAttribute("produtosDisponiveis", produtosDisponiveis);
+        // caminha da página exclusiva de admin
+        String path = "WEB-INF/jsp/conta-admin.jsp";
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
     }
 }    

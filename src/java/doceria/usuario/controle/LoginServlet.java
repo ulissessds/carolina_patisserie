@@ -1,8 +1,13 @@
 package doceria.usuario.controle;
 
+import doceria.categoria.modelo.Categoria;
+import doceria.categoria.modelo.CategoriaDAO;
+import doceria.produto.modelo.Produto;
+import doceria.produto.modelo.ProdutoDAO;
 import doceria.usuario.modelo.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,15 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         /* entrada */
@@ -39,7 +36,18 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("usuario", usuario);
             String path;
             if (usuario.isAdministrador()) {
+                
+                // mandar a lista de categorias
+                CategoriaDAO categoriaDAO = new CategoriaDAO();
+                List<Categoria> categorias = categoriaDAO.listarCategorias();
+                request.setAttribute("categorias", categorias);
+                // mandar a lista de produtos
+                ProdutoDAO produtoDAO = new ProdutoDAO();
+                List<Produto> produtosDisponiveis = produtoDAO.obterProdutosEmEstoque();
+                request.setAttribute("produtosDisponiveis", produtosDisponiveis);
+                // caminho da página exclusiva de admin
                 path = "WEB-INF/jsp/conta-admin.jsp";
+                
             } else {
                 path = "WEB-INF/jsp/conta-cliente.jsp";
             }
@@ -47,7 +55,7 @@ public class LoginServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         } else {
             request.setAttribute("mensagem", "Login ou senha incorreta");
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("conta.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("Inicio");
             requestDispatcher.forward(request, response);
         }
     }

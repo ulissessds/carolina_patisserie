@@ -43,81 +43,14 @@
             
         <div class="categories"></div>
     
-        <!--------- produtos em estoque --------->
-        <div class="small-container">
-            <h2 class="title">Produtos em Estoque</h2>
-            <div class="row">
-                <% 
-                    CategoriaDAO categoriaDAO = new CategoriaDAO();
-                    List<Produto> produtosDisponiveis = (List<Produto>) request.getAttribute("produtosDisponiveis");
-                    if (produtosDisponiveis.isEmpty()) {
-                %>
-                <div>Desculpe, ainda não existem produtos em estoque</div>
-                <%
-                    } else {
-                        for (int i = 0; i < produtosDisponiveis.size(); i++) {
-                            Produto p = produtosDisponiveis.get(i);
-                            Categoria c = categoriaDAO.obter(p.getCategoriaIdFk());
-                %>
-                <div class="col-4">
-                    <img src="MostrarProdutoFoto?id=<%= p.getId() %>" width="200" height="160"/>
-                    <h4><%= p.getDescricao() %></h4>
-                    <div class="rating">
-                        Categoria: <%= c.getDescricao() %>
-                    </div>
-                    <p>R$ <%= p.getPreco() %></p>
-                    <p>Quantidade: <%= p.getQuantidade() %></p>
-                    <a href="AdicionarProdutoSacolaCompras?produtoId=<%= p.getId() %>" class="btn2">
-                        Adicionar à Sacola
-                    </a>
-                    <%
-                        if (p.getFoto() == null || p.getFoto().trim().length() == 0) {
-                    %>
-                    <div>O produto não tem foto</div>
-                    <%
-                        } else {
-                    %>
-                    <a href="DownloadProdutoFoto?id=<%= p.getId() %>" class="btn2">
-                        Download Foto
-                    </a>
-                    <%
-                        }
-                    %>
-                </div>
-                <%
-                        }
-                    }
-                %>
-            </div>
-        </div>
+        <%@ include file="parts/produtos-estoque.jsp" %>
             
         <hr/>
-        <h1>Sacola de Compras</h1>
-        <% 
-            List<SacolaComprasItem> sacolaCompras = (List<SacolaComprasItem>) request.getAttribute("sacolaCompras");
-            double total = 0;
-            if (sacolaCompras == null || sacolaCompras.isEmpty()) {
-        %>
-        <div>Sua Sacola de Compras está vazia (e seu estômago)</div>
-        <%
-            } else {
-                for (int i = 0; i < sacolaCompras.size(); i++) {
-                    SacolaComprasItem sacolaItem = sacolaCompras.get(i);
-                    total += sacolaItem.getQuantidade() * sacolaItem.getProduto().getPreco();
-        %>
-        <div>
-            <h4><%= sacolaItem.getProduto().getDescricao() %></h4>
-            <h5>R$ <%= sacolaItem.getProduto().getPreco() %></h5>
-            <h6>Quantidade: <%= sacolaItem.getQuantidade() %></h6>
-            <a href="RemoverProdutoSacolaCompras?produtoId=<%= sacolaItem.getProduto().getId() %>" class="btn">
-                Remover da Sacola de Compras
-            </a>
+        <div class="account-page">
+            <%@ include file="parts/sacola-compras.jsp" %>
+            <br/>
+            <div>Faça Login para finalizar sua compra!</div>
         </div>
-        <%
-                }
-            }
-        %>
-        <div>Total: R$ <%= total %></div>
         
         <!--------- footer --------->        
         <%@ include file="parts/footer.jsp" %>

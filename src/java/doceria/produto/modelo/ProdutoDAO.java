@@ -80,6 +80,27 @@ public class ProdutoDAO {
         }
         return produtos;
     }
+    public List<Produto> obterTodosProdutos() {
+        List<Produto> produtos = new ArrayList<Produto>();
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/carolinaPatisserie_bd", "postgres", "s4mcr0");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, descricao, preco, quantidade, foto, categoria_id_fk FROM produto;");
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()) {
+                Produto p = new Produto(rs);
+                produtos.add(p);
+            }
+            rs.close();
+            preparedStatement.close();
+            connection.close();
+        } catch (ClassNotFoundException ex) {
+            return null;
+        } catch (SQLException ex) {
+            return null;
+        }
+        return produtos;
+    }
     
     public void atualizarFoto(int id, String fotoPath) throws Exception {
         boolean sucesso = false;

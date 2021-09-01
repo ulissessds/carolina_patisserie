@@ -29,7 +29,7 @@ public class AtualizarProdutoServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String novaDescricao = request.getParameter("novaDescricao");
         Double novoPreco = -1.0; 
-        int novaQuantidade = Integer.parseInt(request.getParameter("novaQuantidade"));
+        int novaQuantidade = -1;
         String categoriaDescricao = request.getParameter("categoriaDescricao");
         
         if (request.getParameter("novoPreco") != null && request.getParameter("novoPreco").trim().length() > 0) {
@@ -58,7 +58,7 @@ public class AtualizarProdutoServlet extends HttpServlet {
         List<Categoria> categorias = categoriaDAO.listarCategorias();
         request.setAttribute("categorias", categorias);
         // mandar a lista de produtos
-        List<Produto> produtosDisponiveis = produtoDAO.obterProdutosEmEstoque();
+        List<Produto> produtosDisponiveis = produtoDAO.obterTodosProdutos();
         request.setAttribute("produtosDisponiveis", produtosDisponiveis);
         // caminha da página exclusiva de admin
         String path = "WEB-INF/jsp/conta-admin.jsp";

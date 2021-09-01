@@ -39,6 +39,15 @@
             <br/>
             <br/>
         </div>
+    
+        <%@ include file="../../parts/produtos-estoque.jsp" %>
+        
+        <hr/>  
+        <div class="account-page">
+            <%@ include file="../../parts/sacola-compras.jsp" %>
+            
+            <a href="" class="btn2">Comprar</a>
+        </div>
         
         <%@ include file="../../parts/footer.jsp" %>
     </body>
